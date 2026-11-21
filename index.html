@@ -1,0 +1,1084 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0077B6">
+<title>FICAMAR | Pescados y Mariscos</title>
+
+<style>
+:root {
+  --blue: #0077B6;
+  --dark-blue: #023E5A;
+  --light-blue: #EAF7FD;
+  --green: #16A34A;
+  --yellow: #FFF3B0;
+  --text: #183344;
+  --muted: #718096;
+  --border: #E4EDF2;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: #F4F8FA;
+  color: var(--text);
+  padding-bottom: 115px;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+.container {
+  max-width: 1050px;
+  margin: auto;
+  padding: 16px;
+}
+
+/* ENCABEZADO */
+
+.hero {
+  background: linear-gradient(135deg, #023E5A, #0077B6);
+  color: white;
+  padding: 28px 20px;
+  border-radius: 0 0 25px 25px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 1050px;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.logo {
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.logo span {
+  color: #FFD166;
+}
+
+.tagline {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 10px;
+  max-width: 450px;
+}
+
+.tagline strong {
+  color: #FFD166;
+}
+
+.hero-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-top: 18px;
+  border: 2px solid rgba(255,255,255,.3);
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  padding: 7px 12px;
+  border-radius: 30px;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+/* BUSCADOR */
+
+.search-box {
+  position: relative;
+  margin: 22px 0;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 16px 18px 16px 45px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: white;
+  outline: none;
+  font-size: 15px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.03);
+}
+
+.search-box input:focus {
+  border-color: var(--blue);
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 15px;
+  font-size: 18px;
+}
+
+/* PRODUCTOS */
+
+.category {
+  margin-bottom: 30px;
+}
+
+.category-title {
+  font-size: 21px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-description {
+  font-size: 12px;
+  color: var(--muted);
+  margin: -8px 0 13px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.product-card {
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.035);
+  transition: .2s;
+}
+
+.product-card.selected {
+  border-color: var(--blue);
+  background: #F5FBFF;
+}
+
+.product-name {
+  font-weight: 750;
+  font-size: 14px;
+  line-height: 1.4;
+  min-height: 39px;
+}
+
+.product-price {
+  color: var(--blue);
+  font-weight: 800;
+  font-size: 17px;
+  margin-top: 7px;
+}
+
+.product-unit {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.product-info {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.product-info strong {
+  color: var(--text);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  gap: 8px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qty-btn {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 10px;
+  background: var(--light-blue);
+  color: var(--blue);
+  font-size: 22px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.qty-btn:active {
+  transform: scale(.92);
+}
+
+.qty-number {
+  font-weight: 800;
+  min-width: 28px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 35px 15px;
+  color: var(--muted);
+  background: white;
+  border-radius: 15px;
+  grid-column: 1/-1;
+}
+
+/* DATOS DEL CLIENTE */
+
+.checkout {
+  background: white;
+  padding: 20px;
+  border-radius: 18px;
+  margin-top: 28px;
+  box-shadow: 0 3px 15px rgba(0,0,0,.04);
+}
+
+.checkout h2 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.checkout-subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  outline: none;
+  background: white;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--blue);
+}
+
+/* BOTONES */
+
+.clear-btn {
+  width: 100%;
+  padding: 13px;
+  background: white;
+  border: 1px solid #F0B6B6;
+  color: #D13C3C;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.clear-btn:active {
+  background: #FFF1F1;
+}
+
+/* RESUMEN FLOTANTE */
+
+.floating-summary {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 20px rgba(0,0,0,.12);
+  z-index: 100;
+}
+
+.summary-inner {
+  max-width: 1050px;
+  margin: auto;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.total-label {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.total-amount {
+  background: var(--yellow);
+  color: #664B00;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.whatsapp-btn {
+  width: 100%;
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 13px;
+  font-size: 15px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(22,163,74,.2);
+}
+
+.whatsapp-btn:active {
+  transform: scale(.99);
+  background: #12843D;
+}
+
+.whatsapp-btn:disabled {
+  background: #AAB8B0;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 25px 10px;
+}
+
+@media (min-width: 700px) {
+  .hero {
+    padding: 35px 30px;
+  }
+
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    align-items: center;
+    gap: 35px;
+  }
+
+  .hero-image {
+    height: 190px;
+    margin: 0;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .checkout {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 370px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card {
+    padding: 13px;
+  }
+
+  .logo {
+    font-size: 29px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENCABEZADO -->
+<header class="hero">
+  <div class="hero-content">
+    <div>
+      <div class="logo">🐟 FICA<span>MAR</span></div>
+
+      <p class="tagline">
+        <strong>¡Del mar a tu mesa!</strong><br>
+        Te entregamos el pescado listo para preparar,
+        <strong>ESCAMADO, POSTEADO, LAVADO.</strong>
+      </p>
+
+      <div class="hero-badge">
+        🦐 Calidad y frescura para tu hogar
+      </div>
+    </div>
+
+    <img
+      class="hero-image"
+      src="https://images.unsplash.com/photo-1534483509719-3feaee7c30da?w=900&q=85"
+      alt="Pescados y mariscos frescos"
+    >
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- BUSCADOR -->
+  <div class="search-box">
+    <span class="search-icon">🔎</span>
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="¿Qué producto estás buscando?"
+      autocomplete="off"
+    >
+  </div>
+
+  <!-- CATEGORÍAS Y PRODUCTOS -->
+  <div id="productsContainer"></div>
+
+  <!-- INFORMACIÓN DEL CLIENTE -->
+  <section class="checkout">
+    <h2>📦 Datos para tu entrega</h2>
+    <p class="checkout-subtitle">
+      Completa tus datos para que podamos confirmar tu pedido.
+    </p>
+
+    <div class="form-group">
+      <label for="customerName">👤 Nombre completo</label>
+      <input
+        type="text"
+        id="customerName"
+        placeholder="Escribe tu nombre"
+        autocomplete="name"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="customerAddress">📍 Dirección de entrega</label>
+      <input
+        type="text"
+        id="customerAddress"
+        placeholder="Barrio, calle, número de casa..."
+        autocomplete="street-address"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="paymentMethod">💳 ¿Cómo deseas pagar?</label>
+      <select id="paymentMethod">
+        <option value="">Selecciona tu medio de pago</option>
+        <option value="Nequi">Nequi</option>
+        <option value="Efectivo">Efectivo</option>
+        <option value="Transferencia">Transferencia</option>
+      </select>
+    </div>
+
+    <button class="clear-btn" onclick="clearOrder()">
+      🗑️ Limpiar pedido
+    </button>
+  </section>
+
+  <div class="footer">
+    <strong>FICAMAR 🐟</strong><br>
+    Frescura y calidad en cada pedido.
+    <br>¡Gracias por preferirnos!
+  </div>
+
+</main>
+
+<!-- RESUMEN FLOTANTE -->
+<div class="floating-summary">
+  <div class="summary-inner">
+
+    <div class="total-row">
+      <div>
+        <div class="total-label">🛒 TU PEDIDO</div>
+        <small id="itemCount">0 productos seleccionados</small>
+      </div>
+
+      <div class="total-amount" id="grandTotal">
+        $0
+      </div>
+    </div>
+
+    <button
+      class="whatsapp-btn"
+      id="whatsappButton"
+      onclick="sendWhatsApp()"
+      disabled
+    >
+      <span>🟢 ENVIAR PEDIDO POR WHATSAPP</span>
+    </button>
+
+  </div>
+</div>
+
+<script>
+
+/* =====================================
+   CONFIGURACIÓN DE LA TIENDA FICAMAR
+===================================== */
+
+const WHATSAPP_NUMBER = "573000000000";
+
+const products = [
+
+  // PESCADOS
+  {
+    id: 1,
+    name: "Lomo de atún",
+    category: "PESCADOS",
+    price: 48000,
+    unit: "kg"
+  },
+  {
+    id: 2,
+    name: "Cabeza de huevo",
+    category: "PESCADOS",
+    price: 34000,
+    unit: "kg"
+  },
+  {
+    id: 3,
+    name: "Pargo rojo",
+    category: "PESCADOS",
+    price: 48000,
+    unit: "kg"
+  },
+  {
+    id: 4,
+    name: "Sierra",
+    category: "PESCADOS",
+    price: 28000,
+    unit: "kg"
+  },
+  {
+    id: 5,
+    name: "Corvina",
+    category: "PESCADOS",
+    price: 28000,
+    unit: "kg"
+  },
+  {
+    id: 6,
+    name: "Robalo grande",
+    category: "PESCADOS",
+    price: 34000,
+    unit: "kg"
+  },
+  {
+    id: 7,
+    name: "Filete de salmón",
+    category: "PESCADOS",
+    price: 58000,
+    unit: "kg"
+  },
+  {
+    id: 8,
+    name: "Variado",
+    category: "PESCADOS",
+    price: 18000,
+    unit: "kg"
+  },
+
+  // MARISCOS
+  {
+    id: 9,
+    name: "Camarón blanquillo precocido",
+    category: "MARISCOS",
+    price: 55000,
+    unit: "kg"
+  },
+  {
+    id: 10,
+    name: "Camarón crudo glaseado desvenado",
+    category: "MARISCOS",
+    price: 40000,
+    unit: "kg"
+  },
+  {
+    id: 11,
+    name: "Langostinos grande U15",
+    category: "MARISCOS",
+    price: 75000,
+    unit: "kg"
+  },
+  {
+    id: 12,
+    name: "Langostas",
+    category: "MARISCOS",
+    price: 75000,
+    unit: "kg"
+  },
+  {
+    id: 13,
+    name: "Calamar pota posta",
+    category: "MARISCOS",
+    price: 40000,
+    unit: "kg"
+  },
+  {
+    id: 14,
+    name: "Anillos de calamar",
+    category: "MARISCOS",
+    price: 45000,
+    unit: "kg"
+  },
+  {
+    id: 15,
+    name: "Pulpo tentáculo",
+    category: "MARISCOS",
+    price: 45000,
+    unit: "kg"
+  },
+  {
+    id: 16,
+    name: "Pulpo entero",
+    category: "MARISCOS",
+    price: 65000,
+    unit: "kg"
+  },
+  {
+    id: 17,
+    name: "Caracol picado",
+    category: "MARISCOS",
+    price: 42000,
+    unit: "kg"
+  },
+  {
+    id: 18,
+    name: "Mejillones",
+    category: "MARISCOS",
+    price: 42000,
+    unit: "kg"
+  },
+  {
+    id: 19,
+    name: "Palmito de cangrejo",
+    category: "MARISCOS",
+    price: 38000,
+    unit: "kg"
+  },
+  {
+    id: 20,
+    name: "Chipi chipi",
+    category: "MARISCOS",
+    price: 32000,
+    unit: "kg"
+  },
+  {
+    id: 21,
+    name: "Carne de Jaiba",
+    category: "MARISCOS",
+    price: 40000,
+    unit: "kg"
+  },
+
+  // BOLSITAS
+  {
+    id: 22,
+    name: "Bolsita de mariscos (contiene camarón, caracol, pulpo, calamar, chipi chipi, palmitos, mejillones)",
+    category: "BOLSITAS",
+    price: 5000,
+    unit: "und"
+  }
+
+];
+
+/* =====================================
+   ESTADO DEL PEDIDO
+===================================== */
+
+// Para productos por kilo:
+// 1 = 0.5 kg
+// 2 = 1 kg
+// 3 = 1.5 kg
+//
+// Para bolsitas:
+// 1 = 1 unidad
+
+const quantities = {};
+
+products.forEach(product => {
+  quantities[product.id] = 0;
+});
+
+/* =====================================
+   FORMATO COLOMBIANO
+===================================== */
+
+function money(value) {
+  return "$" + Math.round(value).toLocaleString("es-CO");
+}
+
+function formatQuantity(product, quantity) {
+
+  if (product.unit === "und") {
+    return quantity + " und";
+  }
+
+  const kg = quantity / 2;
+
+  return Number.isInteger(kg)
+    ? kg + " kg"
+    : kg.toFixed(1) + " kg";
+}
+
+/* =====================================
+   GENERAR PRODUCTOS EN PANTALLA
+===================================== */
+
+const container = document.getElementById("productsContainer");
+
+const categoryConfig = {
+  PESCADOS: {
+    title: "🐟 PESCADOS",
+    description: "Productos vendidos por kilo · Incrementos de 0.5 kg"
+  },
+  MARISCOS: {
+    title: "🦐 MARISCOS",
+    description: "Productos vendidos por kilo · Incrementos de 0.5 kg"
+  },
+  BOLSITAS: {
+    title: "🛍️ BOLSITAS",
+    description: "Productos vendidos por unidad"
+  }
+};
+
+function renderProducts() {
+
+  const search = document
+    .getElementById("searchInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+  container.innerHTML = "";
+
+  const categories = ["PESCADOS", "MARISCOS", "BOLSITAS"];
+
+  let found = false;
+
+  categories.forEach(category => {
+
+    const filtered = products.filter(product =>
+      product.category === category &&
+      product.name.toLowerCase().includes(search)
+    );
+
+    if (filtered.length === 0) return;
+
+    found = true;
+
+    const section = document.createElement("section");
+    section.className = "category";
+
+    const title = document.createElement("h2");
+    title.className = "category-title";
+    title.textContent = categoryConfig[category].title;
+
+    const description = document.createElement("p");
+    description.className = "category-description";
+    description.textContent = categoryConfig[category].description;
+
+    const grid = document.createElement("div");
+    grid.className = "products-grid";
+
+    filtered.forEach(product => {
+
+      const quantity = quantities[product.id];
+
+      const amount = product.unit === "kg"
+        ? quantity / 2 * product.price
+        : quantity * product.price;
+
+      const card = document.createElement("article");
+
+      card.className = "product-card" +
+        (quantity > 0 ? " selected" : "");
+
+      card.innerHTML = `
+        <div class="product-name"></div>
+
+        <div class="product-price">
+          ${money(product.price)}
+          <span class="product-unit">/ ${product.unit}</span>
+        </div>
+
+        <div class="product-info">
+          <div>Cantidad: <strong>${formatQuantity(product, quantity)}</strong></div>
+          <div>Subtotal: <strong>${money(amount)}</strong></div>
+        </div>
+
+        <div class="controls">
+          <div class="quantity-controls">
+
+            <button
+              class="qty-btn"
+              aria-label="Disminuir cantidad"
+              onclick="changeQuantity(${product.id}, -1)"
+            >−</button>
+
+            <span class="qty-number">${quantity}</span>
+
+            <button
+              class="qty-btn"
+              aria-label="Aumentar cantidad"
+              onclick="changeQuantity(${product.id}, 1)"
+            >+</button>
+
+          </div>
+        </div>
+      `;
+
+      card.querySelector(".product-name").textContent = product.name;
+
+      grid.appendChild(card);
+
+    });
+
+    section.appendChild(title);
+    section.appendChild(description);
+    section.appendChild(grid);
+
+    container.appendChild(section);
+
+  });
+
+  if (!found) {
+    container.innerHTML = `
+      <div class="empty-message">
+        🔎 No encontramos productos con ese nombre.
+        <br><br>
+        Intenta con otra búsqueda.
+      </div>
+    `;
+  }
+
+}
+
+/* =====================================
+   MODIFICAR CANTIDADES
+===================================== */
+
+function changeQuantity(id, amount) {
+
+  const product = products.find(p => p.id === id);
+
+  if (!product) return;
+
+  quantities[id] = Math.max(
+    0,
+    quantities[id] + amount
+  );
+
+  renderProducts();
+  updateSummary();
+}
+
+/* =====================================
+   CALCULAR TOTAL
+===================================== */
+
+function getProductSubtotal(product) {
+
+  const quantity = quantities[product.id];
+
+  if (product.unit === "kg") {
+    return quantity / 2 * product.price;
+  }
+
+  return quantity * product.price;
+}
+
+function getGrandTotal() {
+
+  return products.reduce((total, product) => {
+    return total + getProductSubtotal(product);
+  }, 0);
+
+}
+
+/* =====================================
+   ACTUALIZAR RESUMEN FLOTANTE
+===================================== */
+
+function updateSummary() {
+
+  const total = getGrandTotal();
+
+  const selectedProducts = products.filter(product =>
+    quantities[product.id] > 0
+  ).length;
+
+  document.getElementById("grandTotal").textContent =
+    money(total);
+
+  document.getElementById("itemCount").textContent =
+    selectedProducts +
+    (selectedProducts === 1
+      ? " producto seleccionado"
+      : " productos seleccionados");
+
+  document.getElementById("whatsappButton").disabled =
+    total <= 0;
+
+}
+
+/* =====================================
+   LIMPIAR PEDIDO
+===================================== */
+
+function clearOrder() {
+
+  const hasProducts = products.some(product =>
+    quantities[product.id] > 0
+  );
+
+  if (!hasProducts) return;
+
+  if (!confirm("¿Estás seguro de que deseas limpiar todo tu pedido?")) {
+    return;
+  }
+
+  products.forEach(product => {
+    quantities[product.id] = 0;
+  });
+
+  renderProducts();
+  updateSummary();
+
+}
+
+/* =====================================
+   GENERAR Y ENVIAR PEDIDO WHATSAPP
+===================================== */
+
+function sendWhatsApp() {
+
+  const name = document
+    .getElementById("customerName")
+    .value.trim();
+
+  const address = document
+    .getElementById("customerAddress")
+    .value.trim();
+
+  const payment = document
+    .getElementById("paymentMethod")
+    .value;
+
+  const selectedProducts = products.filter(product =>
+    quantities[product.id] > 0
+  );
+
+  if (selectedProducts.length === 0) {
+    alert("Agrega al menos un producto a tu pedido.");
+    return;
+  }
+
+  if (!name) {
+    alert("Por favor, escribe tu nombre.");
+    document.getElementById("customerName").focus();
+    return;
+  }
+
+  if (!address) {
+    alert("Por favor, escribe tu dirección de entrega.");
+    document.getElementById("customerAddress").focus();
+    return;
+  }
+
+  if (!payment) {
+    alert("Por favor, selecciona tu medio de pago.");
+    document.getElementById("paymentMethod").focus();
+    return;
+  }
+
+  let message = "Hola FICAMAR, quiero hacer este pedido:\n\n";
+
+  selectedProducts.forEach(product => {
+
+    const quantity = quantities[product.id];
+
+    const subtotal = getProductSubtotal(product);
+
+    const formattedQuantity = formatQuantity(
+      product,
+      quantity
+    );
+
+    message +=
+      `* ${formattedQuantity} ${product.name} - ${money(subtotal)}\n`;
+
+  });
+
+  message += "\n";
+  message += `Total: ${money(getGrandTotal())}\n\n`;
+  message += `Nombre: ${name}\n`;
+  message += `Dirección: ${address}\n`;
+  message += `Medio de pago: ${payment}\n\n`;
+  message += "¿Puedes confirmarme el pedido?";
+
+  const whatsappURL =
+    "https://wa.me/" +
+    WHATSAPP_NUMBER +
+    "?text=" +
+    encodeURIComponent(message);
+
+  window.open(whatsappURL, "_blank");
+
+}
+
+/* =====================================
+   BUSCADOR EN TIEMPO REAL
+===================================== */
+
+document
+  .getElementById("searchInput")
+  .addEventListener("input", renderProducts);
+
+/* =====================================
+   INICIALIZAR TIENDA
+===================================== */
+
+renderProducts();
+updateSummary();
+
+</script>
+
+</body>
+</html>
